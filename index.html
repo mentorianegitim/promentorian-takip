@@ -3,33 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Öğrenci Muhasebe Takibi</title>
+  <title>Giriş Yap</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; background: #f5f5f5; }
-    input, button { padding: 0.5rem; margin: 0.25rem 0; }
+    body { font-family: sans-serif; padding: 2rem; background: #f0f4f8; }
+    .panel, .giris { max-width: 300px; margin: auto; padding: 1rem; background: white; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    input, button { width: 100%; padding: 0.5rem; margin-top: 0.5rem; }
+    #panel { display: none; }
   </style>
 </head>
 <body>
-  <h1>Öğrenci Ekle</h1>
-  <input type="text" id="ad" placeholder="Ad Soyad" /><br />
-  <input type="number" id="ucret" placeholder="Ders Ücreti" /><br />
-  <button onclick="ekle()">Kaydet</button>
 
-  <h2>Öğrenciler</h2>
-  <ul id="liste"></ul>
+  <!-- GİRİŞ EKRANI -->
+  <div class="giris" id="giris">
+    <h2>Giriş Yap</h2>
+    <input type="text" id="kullanici" placeholder="Kullanıcı Adı" />
+    <input type="password" id="sifre" placeholder="Şifre" />
+    <button onclick="girisYap()">Giriş</button>
+  </div>
+
+  <!-- MUHASEBE PANELİ -->
+  <div class="panel" id="panel">
+    <h2>Öğrenci Ekle</h2>
+    <input type="text" id="ad" placeholder="Ad Soyad" />
+    <input type="number" id="ucret" placeholder="Ders Ücreti" />
+    <button onclick="ekle()">Kaydet</button>
+
+    <h3>Öğrenciler</h3>
+    <ul id="liste"></ul>
+  </div>
 
   <script>
-    const liste = document.getElementById('liste');
-    const ekle = () => {
-      const ad = document.getElementById('ad').value;
-      const ucret = document.getElementById('ucret').value;
+    // Giriş Bilgileri
+    const dogruKullanici = "fatih";
+    const dogruSifre = "260917";
+
+    function girisYap() {
+      const k = document.getElementById("kullanici").value;
+      const s = document.getElementById("sifre").value;
+
+      if (k === dogruKullanici && s === dogruSifre) {
+        document.getElementById("giris").style.display = "none";
+        document.getElementById("panel").style.display = "block";
+      } else {
+        alert("Kullanıcı adı veya şifre yanlış!");
+      }
+    }
+
+    // Öğrenci Ekleme
+    const liste = document.getElementById("liste");
+    function ekle() {
+      const ad = document.getElementById("ad").value;
+      const ucret = document.getElementById("ucret").value;
       if (!ad || !ucret) return alert('Bilgileri doldur!');
-      const li = document.createElement('li');
+      const li = document.createElement("li");
       li.innerText = `${ad} - ₺${ucret}`;
       liste.appendChild(li);
-      document.getElementById('ad').value = '';
-      document.getElementById('ucret').value = '';
-    };
+      document.getElementById("ad").value = "";
+      document.getElementById("ucret").value = "";
+    }
   </script>
+
 </body>
 </html>
