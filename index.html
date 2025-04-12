@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Öğrenci Muhasebe Takibi</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f5f5f5; }
+    input, button { padding: 0.5rem; margin: 0.25rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Öğrenci Ekle</h1>
+  <input type="text" id="ad" placeholder="Ad Soyad" /><br />
+  <input type="number" id="ucret" placeholder="Ders Ücreti" /><br />
+  <button onclick="ekle()">Kaydet</button>
+
+  <h2>Öğrenciler</h2>
+  <ul id="liste"></ul>
+
+  <script>
+    const liste = document.getElementById('liste');
+    const ekle = () => {
+      const ad = document.getElementById('ad').value;
+      const ucret = document.getElementById('ucret').value;
+      if (!ad || !ucret) return alert('Bilgileri doldur!');
+      const li = document.createElement('li');
+      li.innerText = `${ad} - ₺${ucret}`;
+      liste.appendChild(li);
+      document.getElementById('ad').value = '';
+      document.getElementById('ucret').value = '';
+    };
+  </script>
+</body>
+</html>
