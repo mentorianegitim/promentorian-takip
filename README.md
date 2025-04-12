@@ -1,0 +1,2 @@
+# promentorian-takip
+deneme takip
